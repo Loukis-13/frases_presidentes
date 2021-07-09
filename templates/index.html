@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API presidentes</title>
+
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+    <img src="static/img/{{ escolhido }}.jpg" alt="">
+    <h1>Frases cômicas dos presidentes</h1>
+
+    <select name="" id="x">
+        {% for presidente in presidentes %}
+            {% if presidente == escolhido %}
+                <option value="{{ presidente }}" selected>{{ presidente.capitalize() }}</option>
+            {% else %}
+                <option value="{{ presidente }}">{{ presidente.capitalize() }}</option>
+            {% endif %}
+        {% endfor %}
+        <option value="aleatorio">aleatorio</option>
+    </select>
+    <button onclick="window.location.href=document.getElementById('x').value">Ir</button>
+
+    <p><a href="https://github.com/Loukis-13/frases_presidentes">GITHUB</a></p>
+
+    <code>este serviço não tem o objetivo de difamar ou apoiar figuras politicas, apenas repassar frases ditas pelos mesmos.</code>
+</body>
+</html>
