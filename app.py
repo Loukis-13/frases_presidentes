@@ -1,4 +1,5 @@
 from flask import Flask, render_template
+from flask_restplus import Api, Resource
 from random import choice
 
 app = Flask(__name__)
@@ -21,21 +22,31 @@ def frase_html(presidente):
         with open(f'presidentes/{presidente}.txt', 'rt') as frases:
             return render_template('frase.html', frase=choice(frases.readlines()), presidente=presidente), 200
     else:
-        return "<p>Presidente não encontrado</p>"
+        return "<p>Presidente não encontrado</p>", 404
 
-@app.route("/frase/aleatorio")
-def aleatorio():
-    presidente = choice(presidentes)
-    with open(f'presidentes/{presidente}.txt', 'rt') as frases:
-        return f"{choice(frases.readlines())} – {presidente.upper()}"
 
-@app.route("/frase/<string:presidente>")
-def frase(presidente):
-    if presidente.lower() in presidentes:
+api = Api(
+    app,
+    doc= '/docs',
+    title="Frases cômicas dos presidentes",
+    description="Microserviço para servir as frases mais cômicas dos presidentes do Brasil"
+)
+
+@api.route('/frase/aleatorio')
+class Aleatorio(Resource):
+    def get(self):
+        presidente = choice(presidentes)
         with open(f'presidentes/{presidente}.txt', 'rt') as frases:
-            return f"{choice(frases.readlines())} – {presidente.upper()}"
-    else:
-        return "<p>Presidente não encontrado</p>"
+            return f"{choice(frases.readlines())[:-1]} – {presidente.upper()}", 200
+
+@api.route("/frase/<string:presidente>")
+class Frase(Resource):
+    def get(self, presidente):
+        if presidente.lower() in presidentes:
+            with open(f'presidentes/{presidente}.txt', 'rt') as frases:
+                return f"{choice(frases.readlines())[:-1]} – {presidente.upper()}", 200
+        else:
+            return "Presidente não encontrado", 404
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', debug=True)
