@@ -1,0 +1,16 @@
+body {
+    text-align: center;
+}
+
+img {
+    margin-top: 10vh;
+    height: 250px;
+}
+
+p {
+    margin: 5vh;
+}
+
+#git {
+    text-decoration: none;
+}
