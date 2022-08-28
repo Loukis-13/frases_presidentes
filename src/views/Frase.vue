@@ -13,7 +13,7 @@ const frase = frases[Math.floor(Math.random() * frases.length)]
 
 <template>
   <body>
-    <img :src="`/img/${presidente}.jpg`" alt="">
+    <img :src="`img/${presidente}.jpg`" alt="">
     <p id="frase">{{ frase }}</p>
   </body>
 </template>

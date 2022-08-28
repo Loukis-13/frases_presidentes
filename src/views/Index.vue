@@ -8,7 +8,7 @@ let escolhido = presidentes[Math.floor(Math.random() * 4)];
 <template>
 
   <body>
-    <img :src="`/img/${escolhido}.jpg`" alt="">
+    <img :src="`img/${escolhido}.jpg`" alt="">
     <h1>Frases cômicas dos presidentes</h1>
 
     <select v-model="escolhido">
