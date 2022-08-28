@@ -12,4 +12,5 @@ export default defineConfig({
     },
   },
   base: process.env.NODE_ENV === "production" ? "/frases_presidentes/" : "/",
+  publicDir: process.env.NODE_ENV === "production" ? "" : "public/",
 });
