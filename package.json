@@ -6,7 +6,7 @@
     "build": "vite build",
     "preview": "vite preview --port 4173",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
-    "deploy": "npm run build; git commit -am deploy; git subtree push --prefix dist origin gh-pages"
+    "deploy": "npm run build; git add .; git commit -m deploy; git subtree push --prefix dist origin gh-pages"
   },
   "dependencies": {
     "vue": "^3.2.37",
